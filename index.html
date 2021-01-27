@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="reduceItem1" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="currentQuantity1" type="text" class="form-control text-center" value="1">
+                           <button id="addItem1" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$ <span id="itemsPrice1">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="reduceItem2" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="currentQuantity2" type="text" class="form-control text-center" value="1">
+                           <button id="addItem2" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$ <span id="itemsPrice2">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -77,6 +77,71 @@
          </div>
       </div>
    </section>
+   <script>
+      //Item1 increment event handler
+      const addItem1 = document.getElementById("addItem1");
+      addItem1.addEventListener('click', function () {
+         let q1 = incrementItem("currentQuantity1");
+
+         item1PriceIncrement("itemsPrice1", q1);
+      })
+      //Item1 decrement event handler
+      const reduceItem1 = document.getElementById("reduceItem1");
+      reduceItem1.addEventListener('click', function () {
+         let d1 = decrementItem("currentQuantity1");
+         item1PriceIncrement("itemsPrice1", d1);
+      })
+      //Item2 increment event handler
+      const addItem2 = document.getElementById("addItem2");
+      addItem2.addEventListener('click', function () {
+         let q2 = incrementItem("currentQuantity2");
+         item2PriceIncrement("itemsPrice2", q2);
+      })
+      //Item2 decrement event handler
+      const reduceItem2 = document.getElementById("reduceItem2");
+      reduceItem2.addEventListener('click', function () {
+         let d2 = decrementItem("currentQuantity2");
+         item2PriceIncrement("itemsPrice2", d2);
+      })
+
+
+
+
+      //Item increment function
+      function incrementItem(id) {
+         let getCurrentQuantity = document.getElementById(id).value;
+         getCurrentQuantity++;
+         document.getElementById(id).value = getCurrentQuantity;
+
+         return getCurrentQuantity;
+      }
+      //Item decrement function
+      function decrementItem(id) {
+         let getCurrentItem = document.getElementById(id).value;
+         if (getCurrentItem <= 1) {
+            alert("Your can't put you value under 0");
+         }
+         else {
+            getCurrentItem--;
+            document.getElementById(id).value = getCurrentItem;
+         }
+
+         return getCurrentItem;
+      }
+
+      //Item1 Price
+      function item1PriceIncrement(id, quantity) {
+         // const currentProduct1Price = document.getElementById(id).innerText;
+         // const currentProduct1PriceNumber = parseFloat(currentProduct1Price);
+         let product1TotalPrice = 1219 * quantity;
+         document.getElementById(id).innerText = product1TotalPrice;
+      }
+      //Item2 Price
+      function item2PriceIncrement(id, quantity) {
+         let product2TotalPrice = 59 * quantity;
+         document.getElementById(id).innerText = product2TotalPrice;
+      }
+   </script>
 </body>
 
 </html>
